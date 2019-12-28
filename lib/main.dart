@@ -9,7 +9,9 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       theme: ThemeData.dark(),
       home: new Scaffold(
-        appBar: new AppBar(title: new Text("Demo List View")),
+        appBar: new AppBar(
+            title: new Text("የዳንኤል ክብረት እይታዎች")
+          ),
         body: new Home(),
       ),
     );
