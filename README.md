@@ -14,3 +14,12 @@ I worked on this project while studying flutter. *Flutter is Google's UI toolkit
 
 ### Note: 
 I had a problem using `webview` for the detail page. The error said: "*Trying to create a platform view of unregistered type plugins.flutter.io/webview*". I managed to solve it by updating to `minSdkVersion 20`, rather flutter generates `minSdkVersion 16` as default.
+
+The Feed List:
+
+![Feed List](assets/images/1.PNG)
+
+And the feed detail page:
+
+
+![Feed Detail](assets/images/2.PNG)
