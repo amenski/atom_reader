@@ -1,3 +1,4 @@
+import 'package:atom_reader/util/constants.dart';
 import 'package:atom_reader/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:webfeed/domain/atom_feed.dart';
@@ -5,12 +6,12 @@ import 'package:webfeed/domain/atom_item.dart';
 
 import 'package:intl/intl.dart';
 
-class Home extends StatefulWidget {
+class FeedList extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _FeedList createState() => _FeedList();
 }
 
-class _HomeState extends State<Home> {
+class _FeedList extends State<FeedList> {
   List<AtomItem> _atomItems;
 
   @override
@@ -22,9 +23,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _populateContainer(),
+      child:  _populateContainer(),
     );
   }
+
 
   Widget _populateContainer() {
     if (_atomItems == null) {
@@ -38,20 +40,36 @@ class _HomeState extends State<Home> {
       itemBuilder: (context, index) => _buildBody(context, index),
     );
   }
-
+  
   _buildBody(BuildContext context, int index) {
-    var thumbnail;
-    var thumbnailAsset = 'assets/images/default.jpg';
+    return GestureDetector(
+      onTap: () => _navigateToDetail(context, index),
+      child: ListTile(
+        title: Text(_atomItems[index].title),
+        subtitle: Text(new DateFormat()
+            .add_yMd()
+            .format(DateTime.parse(_atomItems[index].published))),
+        leading: _renderThumbnail(index),
+      ),
+    );
+  }
 
+_navigateToDetail(BuildContext context, int index) {
+    Navigator.pushNamed(context, Constants.FeedDetailRoute, arguments: {'data': _atomItems[index]});
+}
+  
+  // Render leading as thumbnail
+  _renderThumbnail(int index) {
+    var thumbnail;
     if (_atomItems[index].media.thumbnails.isNotEmpty) {
       thumbnail = _atomItems[index].media.thumbnails[0].url;
     }
+
     return Container(
-      child: ListTile(
-        title: Text(_atomItems[index].title),
-        subtitle: Text(new DateFormat().add_yMd().format(DateTime.parse(_atomItems[index].published))),
-        leading: thumbnail != null ? Image.network(thumbnail) : Image.asset(thumbnailAsset),
-      ),
+      constraints: BoxConstraints.expand(width: 50.0), //contraint width of the leading image/icon
+      child: thumbnail != null
+          ? Image.network(thumbnail)
+          : Image.asset(Constants.DEFAULT_LEADING_IMAGE),
     );
   }
 
