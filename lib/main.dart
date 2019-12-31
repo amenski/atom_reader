@@ -13,14 +13,13 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: _routes(),
       home: new Scaffold(
         appBar: new AppBar(
-            title: new Text(Constants.APP_TITLE)
-          ),
+          title: new Text(Constants.APP_TITLE),
+        ),
         body: new FeedList(),
       ),
     );
   }
 
-  
   RouteFactory _routes() {
     return (settings) {
       final Map<String, dynamic> arguments = settings.arguments;
@@ -30,7 +29,9 @@ class MyApp extends StatelessWidget {
           screen = FeedList();
           break;
         case Constants.FeedDetailRoute:
-          screen = FeedDetail(item: arguments['data']); //{@code data} defined/passed in Navigator.pushNamed(...)
+          screen = FeedDetail(
+              item: arguments[
+                  'data']); //{@code data} defined/passed in Navigator.pushNamed(...)
           break;
         default:
           return null;
@@ -39,4 +40,3 @@ class MyApp extends StatelessWidget {
     };
   }
 }
-

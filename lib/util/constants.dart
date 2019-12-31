@@ -6,7 +6,7 @@ class Constants {
 
   static const String DEFAULT_LEADING_IMAGE = 'assets/images/default.jpg';
 
-  static const FEED_URL = "https://flutter-academy.com/rss.xml";
+  static const FEED_URL = "https://blog.atom.io/feed.xml";
 
 
    /// Routes in our app
